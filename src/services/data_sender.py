@@ -1,8 +1,9 @@
 import datetime
 import httpx
 from src.models.stock import Stock
+import os
 
-SHEET_URL = "https://script.google.com/macros/s/AKfycbwoWRsbDIdLLb2JA3BRU_Ff4XJBO3zuJDzjBFfdi26o8cm9KVNNFVHqnB4lyily9Q/exec"
+SHEET_URL = os.getenv("POST_URL")
 
 
 class DataSender:

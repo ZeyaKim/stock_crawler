@@ -1,0 +1,28 @@
+name: Web Scraping Workflow
+
+on:
+  schedule:
+    - cron: '30 23 * * *'  # 매일 GMT +9:00 08:30에 실행
+  workflow_dispatch:  # 수동 실행 옵션
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12.3'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install
+    
+    - name: Run scraper
+      run: python main.py
+      env:
+        POST_URL: ${{ secrets.POST_URL }}
