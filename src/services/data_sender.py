@@ -1,4 +1,5 @@
 import datetime
+import pytz
 import httpx
 from src.models.stock import Stock
 import os
@@ -29,7 +30,8 @@ class DataSender:
                 print("Data sent successfully")
 
     def create_request_data(self, stock_infos: list[Stock]):
-        now = datetime.datetime.now()
+        korea_tz = pytz.timezone("Asia/Seoul")
+        now = datetime.datetime.now(korea_tz)
 
         return {
             "metadata": {
